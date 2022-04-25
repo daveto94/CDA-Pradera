@@ -19,12 +19,16 @@ public interface Repositorys extends CrudRepository<Service,Long>{
 
     @Override
     public Optional<Service> findById(Long id);
-
+    
+    public Optional<Service> findByDocumento(Long documento);
+    
     @Override
     public <S extends Service> S save(S entity);
     
     @Override
     public void delete (Service entity);
+
+    public Service save(Optional<Service> actualizacion);
     
    
 }

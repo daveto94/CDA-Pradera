@@ -38,15 +38,21 @@ public class ServiceController {
        repository.save(serv);
        return "ok"; 
     } 
-    @GetMapping("/servicio/{id}")
-    public Optional<Service> getId (@PathVariable Long id){
-        return repository.findById(id);
-    }
-    @PutMapping("/servicio")
-    public Optional<Service> puUpdatetId (@PathVariable Long id,@RequestBody Service serv ){
-        return repository.findById(id);       
+    @GetMapping("/servicio/{documento}")
+    public Optional<Service> getDocumento (@PathVariable Long documento){
+        return repository.findByDocumento(documento);
     }
     /*@PutMapping("/servicio/{id}")
+    public Service UpdateID (@RequestBody Service serv, @PathVariable Long id ){
+        Service actualizacion =  repository.findById(id);    
+        actualizacion.setDocumento(serv.getDocumento());
+        actualizacion.setNombre(serv.getApellido());
+        actualizacion.setApellido(serv.getApellido());
+        actualizacion.setDocumento(serv.getDocumento());
+        
+        return repository.save(actualizacion);
+    }
+     /*@PutMapping("/servicio/{id}")
     public Optional<Service> puUpdatetId (@PathVariable Long id,@RequestBody Service serv ){
         for(Service p:repository.findById()){
             if(Service.getId(p) == id){
