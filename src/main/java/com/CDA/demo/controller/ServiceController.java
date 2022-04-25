@@ -42,25 +42,23 @@ public class ServiceController {
     public Optional<Service> getDocumento (@PathVariable Long documento){
         return repository.findByDocumento(documento);
     }
-    /*@PutMapping("/servicio/{id}")
-    public Service UpdateID (@RequestBody Service serv, @PathVariable Long id ){
-        Service actualizacion =  repository.findById(id);    
-        actualizacion.setDocumento(serv.getDocumento());
-        actualizacion.setNombre(serv.getApellido());
-        actualizacion.setApellido(serv.getApellido());
-        actualizacion.setDocumento(serv.getDocumento());
-        
-        return repository.save(actualizacion);
-    }
-     /*@PutMapping("/servicio/{id}")
-    public Optional<Service> puUpdatetId (@PathVariable Long id,@RequestBody Service serv ){
-        for(Service p:repository.findById()){
-            if(Service.getId(p) == id){
-               repository.save(serv); 
-            }
+    @PutMapping("/servicio")
+    public String UpdateID (@RequestBody Service serv){
+        Long id = serv.getId();
+        if(repository.existsById(id)){
+            Service actualizacion = repository.findById(id).get();
+            actualizacion.setId(serv.getId());
+            actualizacion.setDocumento(serv.getDocumento());
+            actualizacion.setNombre(serv.getNombre());
+            actualizacion.setApellido(serv.getApellido());
+            actualizacion.setDocumento(serv.getDocumento());
+            repository.save(actualizacion);
+        } 
+        else{
+            repository.save(serv);
         }
-        return null;
-    }*/
+        return "ok";
+    }
     @DeleteMapping("/servicio/{id}")
     public String deleteId(@PathVariable Long id){
         repository.deleteById(id);

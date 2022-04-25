@@ -29,6 +29,9 @@ public interface Repositorys extends CrudRepository<Service,Long>{
     public void delete (Service entity);
 
     public Service save(Optional<Service> actualizacion);
+
+    @Override
+    public boolean existsById(Long id);
     
    
 }
