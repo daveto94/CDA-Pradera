@@ -29,14 +29,15 @@ public class ServiceController {
     @Autowired                                                                  //inicializar repositorio
     Repositorys repository;
     
+    
     @GetMapping("/servicio")
      public List<Service> finAll(){
          return repository.findAll();
     }
     @PostMapping("/servicio")
-    public String saveId(@RequestBody Service serv){
+    public void saveId(@RequestBody Service serv){
        repository.save(serv);
-       return "ok"; 
+       //return "ok"; 
     } 
     @GetMapping("/servicio/{documento}")
     public Optional<Service> getDocumento (@PathVariable Long documento){
@@ -51,7 +52,7 @@ public class ServiceController {
             actualizacion.setDocumento(serv.getDocumento());
             actualizacion.setNombre(serv.getNombre());
             actualizacion.setApellido(serv.getApellido());
-            actualizacion.setDocumento(serv.getDocumento());
+            actualizacion.setFecha(serv.getFecha());
             repository.save(actualizacion);
         } 
         else{
@@ -60,8 +61,9 @@ public class ServiceController {
         return "ok";
     }
     @DeleteMapping("/servicio/{id}")
+
     public String deleteId(@PathVariable Long id){
         repository.deleteById(id);
         return "ok";
-    }    
+    } 
 }

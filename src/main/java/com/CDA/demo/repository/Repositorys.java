@@ -7,10 +7,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author User
- */
+
 @Repository 
 public interface Repositorys extends CrudRepository<Service,Long>{
     
