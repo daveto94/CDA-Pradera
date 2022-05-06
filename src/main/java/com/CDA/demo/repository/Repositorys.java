@@ -30,5 +30,5 @@ public interface Repositorys extends CrudRepository<Service,Long>{
     @Override
     public boolean existsById(Long id);
     
-   
+    public boolean existsByDocumento(Long documento);
 }

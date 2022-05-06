@@ -45,14 +45,18 @@ public class ServiceController {
     }
     @PutMapping("/servicio")
     public String UpdateID (@RequestBody Service serv){
-        Long id = serv.getId();
-        if(repository.existsById(id)){
-            Service actualizacion = repository.findById(id).get();
+        Long documentoID = serv.getDocumento();
+        if(repository.existsByDocumento(documentoID)){
+            Service actualizacion = repository.findByDocumento(documentoID).get();
             actualizacion.setId(serv.getId());
             actualizacion.setDocumento(serv.getDocumento());
-            actualizacion.setNombre(serv.getNombre());
-            actualizacion.setApellido(serv.getApellido());
+            actualizacion.setNombre_apellido(serv.getNombre_apellido());
+            actualizacion.setTelefono(serv.getTelefono());
+            actualizacion.setTipo_vehiculo(serv.getTipo_vehiculo());
+            actualizacion.setPlaca(serv.getPlaca());
+            actualizacion.setModelo(serv.getModelo());
             actualizacion.setFecha(serv.getFecha());
+            actualizacion.setHora(serv.getHora());
             repository.save(actualizacion);
         } 
         else{
@@ -61,7 +65,6 @@ public class ServiceController {
         return "ok";
     }
     @DeleteMapping("/servicio/{id}")
-
     public String deleteId(@PathVariable Long id){
         repository.deleteById(id);
         return "ok";
